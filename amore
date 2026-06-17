@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Taiga ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    font-family:"Bodoni MT", serif;
+    background:linear-gradient(135deg,#ffd6e7,#dce8ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#loadingScreen{
+    position:fixed;
+    inset:0;
+    background:#111;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:10;
+    font-family:"Bodoni MT", serif;
+}
+
+#loadingText{
+    font-size:22px;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    width:90%;
+    max-width:600px;
+    padding:30px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    z-index:2;
+    display:none;
+}
+
+h1{
+    font-family:Castellar, serif;
+    color:#d63384;
+}
+
+button{
+    border:none;
+    padding:12px 24px;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:#ff4d94;
+    color:white;
+}
+
+#noBtn{
+    background:#eee;
+    position:absolute;
+}
+
+#meterSection{
+    display:none;
+    margin-top:20px;
+}
+
+.bar{
+    width:100%;
+    height:25px;
+    background:#eee;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    width:0%;
+    background:#ff4d94;
+}
+
+#finalSection{
+    display:none;
+}
+
+.float{
+    position:fixed;
+    bottom:-50px;
+    animation:floatUp 6s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-110vh);
+        opacity:0;
+    }
+}
+
+#spiderman{
+    position:fixed;
+    top:80px;
+    left:-100px;
+    font-size:45px;
+    z-index:20;
+    display:none;
+    animation:swing 4s ease-in-out forwards;
+}
+
+@keyframes swing{
+    0%{
+        left:-100px;
+        transform:rotate(-20deg);
+    }
+    50%{
+        left:50%;
+        transform:rotate(20deg);
+    }
+    100%{
+        left:110%;
+        transform:rotate(-20deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loadingScreen">
+    <div id="loadingText">System loading...</div>
+</div>
+
+<div id="spiderman">🕷️🕸️</div>
+
+<div class="container" id="mainCard">
+
+<h1>Amore ❤️</h1>
+
+<p>Dear Taiga,</p>
+
+<p>
+I'm sorry for the stupid things I do or say, you are my delicate petal and I want to cherish you like the precious girl you are.
+</p>
+
+<p>
+I'm sorry for the times my words have hurt you when that was never my intention. And I know I say that many times, but I just want to remind you of my love and care even when it's not entirely visible.
+</p>
+
+<p>
+I will do tauba 100 times with both ears on my knees in front of you okay?
+I want to try my best to be better for you, so I will make that one of my goals.
+</p>
+
+<p>Will you forgive me?</p>
+
+<button id="yesBtn" onclick="startMeter()">Heck Yeah </button>
+<button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">Hell No </button>
+
+<div id="meterSection">
+<h3 id="meterText">Calculating how much I love Taiga...</h3>
+
+<div class="bar">
+<div class="fill" id="fill"></div>
+</div>
+</div>
+
+<div id="finalSection">
+<h2>Result: OFF THE CHARTS RAHHH</h2>
+
+<p>
+I love you.
+You are my sun.
+</p>
+
+<p>
+I am sorry, Amore.
+I will keep trying to show it through my actions too.
+</p>
+</div>
+
+</div>
+
+<audio id="song" src="song.mp3"></audio>
+
+<script>
+const loadingMessages = [
+    "System loading...",
+    "ERROR: I said something dumb again.",
+    "Attempting emotional repair...",
+    "Checking apology sincerity...",
+    "Sincerity detected: very high.",
+    "Loading love for you..."
+];
+
+let loadingIndex = 0;
+
+let loadingTimer = setInterval(() => {
+    document.getElementById("loadingText").innerHTML = loadingMessages[loadingIndex];
+    loadingIndex++;
+
+    if(loadingIndex >= loadingMessages.length){
+        clearInterval(loadingTimer);
+
+        setTimeout(() => {
+            document.getElementById("loadingScreen").style.display = "none";
+            document.getElementById("mainCard").style.display = "block";
+            swingSpiderman();
+        }, 800);
+    }
+}, 900);
+
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+
+let size=16;
+let noClicks=0;
+
+const noMessages=[
+    "Are you sure? ",
+    "Really sure? ",
+    "Per favoreee",
+    "Amoreeee ",
+    "I will do tauba ",
+    "I'll go to the mandir with you and pray",
+    "Pretty please?",
+    "Okay but the yes button is right there "
+];
+
+function moveButton(){
+    let x=Math.random()*(window.innerWidth-150);
+    let y=Math.random()*(window.innerHeight-80);
+
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+
+    noBtn.innerHTML=noMessages[noClicks % noMessages.length];
+    noClicks++;
+
+    size+=4;
+    yesBtn.style.fontSize=size+"px";
+}
+
+function startMeter(){
+    document.getElementById("meterSection").style.display="block";
+
+    let fill=document.getElementById("fill");
+    let text=document.getElementById("meterText");
+
+    let progress=0;
+
+    let timer=setInterval(()=>{
+
+        progress+=5;
+        fill.style.width=progress+"%";
+
+        text.innerHTML="Calculating how much I love you... "+progress+"%";
+
+        if(progress>=100){
+            clearInterval(timer);
+
+            text.innerHTML="Love level detected: 1 × 10^1000000000 ";
+
+            document.getElementById("finalSection").style.display="block";
+
+            document.getElementById("song").play();
+
+            swingSpiderman();
+
+            for(let i=0;i<80;i++){
+                setTimeout(createFloat,i*80);
+            }
+        }
+
+    },120);
+}
+
+function createFloat(){
+    const items=[
+        "❤️",
+        "🐈",
+        "🌸",
+        "💙",
+        "🕷️",
+        "🏐",
+        "🏏",
+        "🌺"
+    ];
+
+    let thing=document.createElement("div");
+
+    thing.className="float";
+    thing.innerHTML=items[Math.floor(Math.random()*items.length)];
+    thing.style.left=Math.random()*100+"vw";
+    thing.style.fontSize=(20+Math.random()*20)+"px";
+
+    document.body.appendChild(thing);
+
+    setTimeout(()=>{
+        thing.remove();
+    },6000);
+}
+
+function swingSpiderman(){
+    const spiderman=document.getElementById("spiderman");
+    spiderman.style.display="block";
+    spiderman.style.animation="none";
+
+    setTimeout(()=>{
+        spiderman.style.animation="swing 4s ease-in-out forwards";
+    },50);
+
+    setTimeout(()=>{
+        spiderman.style.display="none";
+    },4200);
+}
+</script>
+
+</body>
+</html>
